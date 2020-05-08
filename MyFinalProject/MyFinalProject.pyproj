@@ -50,6 +50,7 @@
   <ItemGroup>
     <Content Include="MyFinalProject\static\data\Teonot2017.csv" />
     <Content Include="MyFinalProject\static\data\Teonot2018.csv" />
+    <Content Include="MyFinalProject\static\data\users.csv" />
     <Content Include="MyFinalProject\static\imgs\american_flag.jpg" />
     <Content Include="MyFinalProject\static\imgs\bush.jpg" />
     <Content Include="MyFinalProject\static\imgs\clinton.jpg" />
@@ -57,10 +58,8 @@
     <Content Include="MyFinalProject\static\imgs\oran.jpg" />
     <Content Include="MyFinalProject\static\imgs\tichonet.png" />
     <Content Include="MyFinalProject\static\imgs\trump.jpg" />
-    <Content Include="MyFinalProject\templates\assignment_5130.html" />
     <Content Include="MyFinalProject\templates\data.html" />
     <Content Include="MyFinalProject\templates\Teonot2017.html" />
-    <Content Include="MyFinalProject\templates\tracking_changes.html" />
     <Content Include="MyFinalProject\templates\Teonot2018.html" />
     <Content Include="MyFinalProject\templates\login.html" />
     <Content Include="MyFinalProject\templates\register.html" />

@@ -103,15 +103,7 @@ def data():
         
     )
 
-@app.route('/project_resources')
-def project_resources():
 
-    print("Project Resources")
-
-    """Renders the about page."""
-    return render_template(
-        'project_resources.html'
-    )
 
 @app.route('/hebrew_text')
 def hebrew_text():
@@ -182,28 +174,6 @@ def Teonot2017():
         form2 = form2
     )
 
-
-@app.route('/data/assignment_5130' , methods = ['GET' , 'POST'])
-def assignment_5130():
-
-    print("5130")
-
-    return render_template(
-        'assignment_5130.html'
-    )
-
-@app.route('/tracking_changes')
-def tracking_changes():
-
-    print("Log")
-
-    """Renders the about page."""
-    return render_template(
-        'tracking_changes.html',
-        title='Tracking changes to the site',
-        year=datetime.now().year,
-        message=''
-    )
 @app.route('/register', methods=['GET', 'POST'])
 def Register():
     form = UserRegistrationFormStructure(request.form)
