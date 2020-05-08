@@ -5,7 +5,7 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, IntegerField
 from wtforms import Form, BooleanField, PasswordField
 from wtforms import TextField, TextAreaField, SelectField, DateField
 from wtforms import validators, ValidationError
@@ -37,8 +37,8 @@ class QueryFormStructure(FlaskForm):
 ##   the 'submit' button - the button the user will press to have the 
 ##                         form be "posted" (sent to the server for process)
 class LoginFormStructure(FlaskForm):
-    username   = StringField('User name:  ' , validators = [DataRequired()])
-    password   = PasswordField('Pass word:  ' , validators = [DataRequired()])
+    username   = StringField('Username:  ' , validators = [DataRequired()])
+    password   = PasswordField('Password:  ' , validators = [DataRequired()])
     submit = SubmitField('Submit')
 
 
@@ -60,8 +60,8 @@ class UserRegistrationFormStructure(FlaskForm):
     LastName   = StringField('Last name:  ' , validators = [DataRequired()])
     PhoneNum   = StringField('Phone number:  ' , validators = [DataRequired()])
     EmailAddr  = StringField('E-Mail:  ' , validators = [DataRequired()])
-    username   = StringField('User name:  ' , validators = [DataRequired()])
-    password   = PasswordField('Pass word:  ' , validators = [DataRequired()])
+    username   = StringField('Username:  ' , validators = [DataRequired()])
+    password   = PasswordField('Password:  ' , validators = [DataRequired()])
     submit = SubmitField('Submit')
 
     
@@ -87,3 +87,9 @@ class CollapseForm(FlaskForm):
 #class DataParametersFormStructure(FlaskForm):
 #    
 #    submit = SubmitField('Submit')
+
+class QueryForm(FlaskForm):
+    hodesh1  = IntegerField('First month:' , validators = [DataRequired()])
+    hodesh2  = IntegerField('Second month:' , validators = [DataRequired()])
+    yomlila  = IntegerField('5 for day, 1 for night:  ' , validators = [DataRequired()])
+    submit = SubmitField('Submit')

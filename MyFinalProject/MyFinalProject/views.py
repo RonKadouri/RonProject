@@ -35,7 +35,10 @@ from wtforms import Form, BooleanField, StringField, PasswordField, validators
 from wtforms import TextField, TextAreaField, SubmitField, SelectField, DateField
 from wtforms import ValidationError
 
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 
+from MyFinalProject.Models.QueryFormStructure import QueryForm
 from MyFinalProject.Models.QueryFormStructure import QueryFormStructure 
 from MyFinalProject.Models.QueryFormStructure import LoginFormStructure 
 from MyFinalProject.Models.QueryFormStructure import UserRegistrationFormStructure 
@@ -215,5 +218,65 @@ def Login():
         year=datetime.now().year,
         repository_name='Pandas',
         )
+
+@app.route('/Query' , methods = ['GET' , 'POST'])
+def Query():
+
+
+    form1 = QueryForm()
+    chart1 = ""
+    chart2 = ""
+
+
+   
+    df2017 = pd.read_csv(path.join(path.dirname(__file__), 'static/data/Teonot2017.csv'))
+    df2018 = pd.read_csv(path.join(path.dirname(__file__), 'static/data/Teonot2018.csv'))
+    
+    
+
+    if request.method == 'POST':
+        hodesh1 = form1.hodesh1.data
+        hodesh2 = form1.hodesh2.data
+        yomlila = form1.yomlila.data
+
+
+        df2017 = df2017[(df2017.HODESH_TEUNA == hodesh1) | (df2017.HODESH_TEUNA == hodesh2)]
+        df2017 = df2017[(df2017.YOM_LAYLA == yomlila)]
+        df2017 = df2017.drop ("YOM_LAYLA",1)
+        df2017 = df2017.groupby(["HODESH_TEUNA","HUMRAT_TEUNA"]).size().to_frame()
+        df2017 = df2017.unstack()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        df2017.plot(kind = "bar", ax = ax)
+        chart1 = plot_to_img(fig)
+
+        df2018 = df2018[(df2018.HODESH_TEUNA == hodesh1) | (df2018.HODESH_TEUNA == hodesh2)]
+        df2018 = df2018[(df2018.YOM_LAYLA == yomlila)]
+        df2018 = df2018.drop ("YOM_LAYLA",1)
+        df2018 = df2018.groupby(["HODESH_TEUNA","HUMRAT_TEUNA"]).size().to_frame()
+        df2018 = df2018.unstack()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        df2018.plot(kind = "bar", ax = ax)
+        chart2 = plot_to_img(fig)
+
+    
+    return render_template(
+        'Query.html',
+        form1 = form1,
+        chart1 = chart1,
+        chart2 = chart2
+
+    )
+
+
+
+def plot_to_img(fig):
+    pngImage = io.BytesIO()
+    FigureCanvas(fig).print_png(pngImage)
+    pngImageB64String = "data:image/png;base64,"
+    pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')
+    return pngImageB64String
+
 
 

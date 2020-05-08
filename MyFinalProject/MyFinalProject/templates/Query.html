@@ -1,0 +1,40 @@
+﻿{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+
+
+<div class="row">
+
+    <div class="col-md-4">
+        <form method="post">
+
+            {{ form1.csrf_token }}
+            {{ wtf.form_field(form1.hodesh1)}}
+            {{ wtf.form_field(form1.hodesh2)}}
+            {{ wtf.form_field(form1.yomlila)}}
+
+            <input class="btn btn-primary" type="submit" value="submit">
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+
+            <h1>2017</h1>
+            <img src={{ chart1 }} class="img-thumbnail" alt="not found">
+            <br /><br />
+            <h1>2018</h1>
+            <img src={{ chart2 }} class="img-thumbnail" alt="not found">
+
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+
+<hr />
+
+    {% endblock %}
